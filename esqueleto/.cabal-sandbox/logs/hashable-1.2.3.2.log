@@ -1,0 +1,22 @@
+Configuring hashable-1.2.3.2...
+Building hashable-1.2.3.2...
+Preprocessing library hashable-1.2.3.2...
+[1 of 3] Compiling Data.Hashable.Class ( Data/Hashable/Class.hs, dist/dist-sandbox-2ac15349/build/Data/Hashable/Class.o )
+
+Data/Hashable/Class.hs:213:11: Warning:
+    In the use of ‘bitSize’ (imported from Data.Bits):
+    Deprecated: "Use 'bitSizeMaybe' or 'finiteBitSize' instead"
+
+Data/Hashable/Class.hs:236:11: Warning:
+    In the use of ‘bitSize’ (imported from Data.Bits):
+    Deprecated: "Use 'bitSizeMaybe' or 'finiteBitSize' instead"
+[2 of 3] Compiling Data.Hashable.Generic ( Data/Hashable/Generic.hs, dist/dist-sandbox-2ac15349/build/Data/Hashable/Generic.o )
+
+Data/Hashable/Generic.hs:20:1: Warning:
+    The import of ‘Bits’ from module ‘Data.Bits’ is redundant
+[3 of 3] Compiling Data.Hashable    ( Data/Hashable.hs, dist/dist-sandbox-2ac15349/build/Data/Hashable.o )
+In-place registering hashable-1.2.3.2...
+Creating package registration file: /tmp/pkgConf-hashable-1.2.35576.2
+Installing library in
+/home/hirofumi/yesod/CowTable1/esqueleto/.cabal-sandbox/lib/x86_64-linux-ghc-7.8.4/hashable-1.2.3.2
+Registering hashable-1.2.3.2...

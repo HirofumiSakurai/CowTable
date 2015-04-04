@@ -1,0 +1,35 @@
+Configuring esqueleto-2.1.2.2...
+Building esqueleto-2.1.2.2...
+Preprocessing library esqueleto-2.1.2.2...
+[1 of 4] Compiling Database.Esqueleto.Internal.PersistentImport ( src/Database/Esqueleto/Internal/PersistentImport.hs, dist/dist-sandbox-2ac15349/build/Database/Esqueleto/Internal/PersistentImport.o )
+[2 of 4] Compiling Database.Esqueleto.Internal.Language ( src/Database/Esqueleto/Internal/Language.hs, dist/dist-sandbox-2ac15349/build/Database/Esqueleto/Internal/Language.o )
+[3 of 4] Compiling Database.Esqueleto.Internal.Sql ( src/Database/Esqueleto/Internal/Sql.hs, dist/dist-sandbox-2ac15349/build/Database/Esqueleto/Internal/Sql.o )
+
+src/Database/Esqueleto/Internal/Sql.hs:229:19: Warning:
+    In the use of type constructor or class ‘Connection’
+    (imported from Database.Esqueleto.Internal.PersistentImport, but defined in persistent-2.1.2:Database.Persist.Sql.Types):
+    Deprecated: "Please use SqlBackend instead"
+
+src/Database/Esqueleto/Internal/Sql.hs:457:15: Warning:
+    This binding for ‘when_’ shadows the existing binding
+      imported from ‘Database.Esqueleto.Internal.Language’ at src/Database/Esqueleto/Internal/Sql.hs:72:1-43
+      (and originally defined
+         at src/Database/Esqueleto/Internal/Language.hs:398:1-5)
+
+src/Database/Esqueleto/Internal/Sql.hs:467:13: Warning:
+    This binding for ‘when_’ shadows the existing binding
+      bound at src/Database/Esqueleto/Internal/Sql.hs:457:15
+
+src/Database/Esqueleto/Internal/Sql.hs:470:37: Warning:
+    This binding for ‘p1’ shadows the existing binding
+      bound at src/Database/Esqueleto/Internal/Sql.hs:457:27
+
+src/Database/Esqueleto/Internal/Sql.hs:470:40: Warning:
+    This binding for ‘f1’ shadows the existing binding
+      bound at src/Database/Esqueleto/Internal/Sql.hs:457:30
+[4 of 4] Compiling Database.Esqueleto ( src/Database/Esqueleto.hs, dist/dist-sandbox-2ac15349/build/Database/Esqueleto.o )
+In-place registering esqueleto-2.1.2.2...
+Creating package registration file: /tmp/pkgConf-esqueleto-2.1.25576.2
+Installing library in
+/home/hirofumi/yesod/CowTable1/esqueleto/.cabal-sandbox/lib/x86_64-linux-ghc-7.8.4/esqueleto-2.1.2.2
+Registering esqueleto-2.1.2.2...

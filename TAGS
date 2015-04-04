@@ -1,0 +1,89 @@
+
+./CowTable2conduit.hs,319
+import import15,16
+data App App21,22
+data App = AppApp21,22
+             { appPool appPool22,23
+instance instance91,92
+getHomeR getHomeR101,102
+getHomeR getHomeR102,103
+openConnectionCount openConnectionCount113,114
+openConnectionCount openConnectionCount114,115
+main main116,117
+main main117,118
+
+./CowTable2conduitRailsDB.hs,315
+import import13,14
+data App App20,21
+data App = AppApp20,21
+             { appPool appPool21,22
+instance instance87,88
+getHomeR getHomeR97,98
+getHomeR getHomeR98,99
+openConnectionCount openConnectionCount108,109
+openConnectionCount openConnectionCount109,110
+main main111,112
+main main112,113
+
+./CowTable2.hs,257
+data App App20,21
+data App = App App20,21
+instance instance89,90
+getHomeR getHomeR96,97
+getHomeR getHomeR97,98
+openConnectionCount openConnectionCount103,104
+openConnectionCount openConnectionCount104,105
+main main106,107
+main main107,108
+
+./CowTable3.hs,261
+data App App22,23
+data App = App App22,23
+instance instance91,92
+getHomeR getHomeR107,108
+getHomeR getHomeR108,109
+openConnectionCount openConnectionCount121,122
+openConnectionCount openConnectionCount122,123
+main main124,125
+main main125,126
+
+./CowTable1.hs,249
+data App App19,20
+data App = App App19,20
+instance instance36,37
+getHomeR getHomeR43,44
+getHomeR getHomeR44,45
+openConnectionCount openConnectionCount48,49
+openConnectionCount openConnectionCount49,50
+main main51,52
+main main52,53
+
+./CowTable3conduit.hs,319
+import import17,18
+data App App23,24
+data App = AppApp23,24
+             { appPool appPool24,25
+instance instance93,94
+getHomeR getHomeR103,104
+getHomeR getHomeR104,105
+openConnectionCount openConnectionCount115,116
+openConnectionCount openConnectionCount116,117
+main main118,119
+main main119,120
+
+./CowTable2BuildData.hs,80
+data App App21,22
+data App = App App21,22
+main main84,85
+main main85,86
+
+./CowTable2RailsDB.hs,254
+data App App20,21
+data App = App App20,21
+instance instance86,87
+getHomeR getHomeR93,94
+getHomeR getHomeR94,95
+openConnectionCount openConnectionCount98,99
+openConnectionCount openConnectionCount99,100
+main main101,102
+main main102,103

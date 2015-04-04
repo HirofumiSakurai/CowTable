@@ -1,0 +1,4 @@
+persistent-sqlite -any
+sqlite -any
+yesod -any
+esqueleto -any
