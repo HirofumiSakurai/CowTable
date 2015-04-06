@@ -1,0 +1,35 @@
+<h1>とりあえずYesod
+<a href="@{HomeR}">ホームへ
+<br />
+<form action=@{Example04R} method="POST">
+    <p>テキスト1(必須)
+    <input name="textVal1" type="text" value="初期値1" required>
+    <p>テキスト2(任意)
+    <input name="textVal2" type="text" value="初期値2">
+    <p>数値(HTML5)
+    <input name="numVal" type="number" value="" required>
+    <p>チェックボックス(Bool)
+    <input name="boolVal" type="checkbox" checked value="1">
+    <p>ラジオボタン
+    <div>
+        <input name="radioSelectVal" type="radio" value="Tokyo">東京
+        <input name="radioSelectVal" type="radio" value="Osaka" checked>大阪
+        <input name="radioSelectVal" type="radio" value="Nagoya">名古屋
+    <p>ドロップダウンリスト
+    <select name="singleSelectVal" required>
+        <option value="apple">りんご
+        <option value="banana">バナナ
+        <option value="orange">オレンジ
+        <option value="grape">ぶどう
+        <option value="meron">メロン
+        <option value="beef">牛肉
+    <p>ドロップダウンリスト
+    <div>
+        <select name="multiSelectVal" multiple>
+            <option value="apple">りんご
+            <option value="banana">バナナ
+            <option value="orange">オレンジ
+            <option value="grape">ぶどう
+            <option value="meron">メロン
+            <option value="beef">牛肉
+    <input type="submit" value="送信">

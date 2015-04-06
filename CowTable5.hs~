@@ -1,0 +1,146 @@
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GADTs             #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes       #-}
+{-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
+
+import           Control.Applicative ((<$>), (<*>))
+import           Control.Monad (forM_)
+import           Control.Monad.Logger (runStderrLoggingT)
+import           Control.Monad.Trans.Resource ()
+import           Data.List (intercalate)
+import           Data.Text (Text,pack)
+import           Data.Text.Encoding (decodeUtf8)
+import           Data.Aeson ()
+import           Data.Aeson.Types ()
+import           Database.HDBC
+import           Database.HDBC.Sqlite3
+import           Data.Time.Clock
+import           Yesod
+
+data App = App {connection :: Connection,
+                tableColumns :: [(String, [String])]
+               }
+
+mkYesod "App" [parseRoutes|
+/ HomeR GET
+/cowJson CowJsonR GET
+|]
+
+instance Yesod App
+
+instance RenderMessage App FormMessage where
+    renderMessage _ _ = defaultFormMessage
+
+-- see.  Database-HDBC-SqlValue.html
+instance ToJSON [(String, SqlValue)] where
+  toJSON row = object $ map toJSONRow row
+      where
+        toJSONRow (colName, SqlNull) = ((pack colName) .= Null)
+        toJSONRow (colName, sqlValue) = ((pack colName) .= (toText sqlValue))
+        toText (Database.HDBC.SqlString s) = pack s
+        toText (SqlByteString s) = decodeUtf8 s
+        toText (Database.HDBC.SqlWord32 i) = pack $ show i
+        toText (Database.HDBC.SqlWord64 i) = pack $ show i
+        toText (Database.HDBC.SqlInt32 i) = pack $ show i
+        toText (Database.HDBC.SqlInt64 i) = pack $ show i
+        toText (Database.HDBC.SqlInteger i) = pack $ show i
+        toText (Database.HDBC.SqlChar c) = pack $ [c]
+        toText (Database.HDBC.SqlBool b) = pack $ show b
+        toText (Database.HDBC.SqlDouble a) = pack $ show a
+        toText (Database.HDBC.SqlRational a) = pack $ show a
+        toText (Database.HDBC.SqlLocalDate d) = pack $ show d
+        toText (Database.HDBC.SqlLocalTimeOfDay d) = pack $ show d
+        -- toText (Database.HDBC.SqlZonedLocalTimeOfDay d z) =
+        -- SqlZonedLocalTimeOfDay TimeOfDay TimeZone -- ^ Local HH:MM:SS -HHMM.
+        -- Converts to and from (TimeOfDay, TimeZone).
+        toText (Database.HDBC.SqlLocalTime t) = pack $ show t
+        toText (Database.HDBC.SqlZonedTime t) = pack $ show t
+        toText (Database.HDBC.SqlUTCTime t) = pack $ show t
+        toText (Database.HDBC.SqlDiffTime t) = pack $ show t
+        toText (Database.HDBC.SqlPOSIXTime t) = pack $ show t
+        toText (Database.HDBC.SqlEpochTime t) = pack $ show t
+        toText (Database.HDBC.SqlTimeDiff i) = pack $ show i
+        -- toText (Database.HDBC.SqlNull) = pack "NULL"
+        toText _ = pack "<undefined>"
+
+getHomeR :: Handler Html
+getHomeR = do
+  defaultLayout [whamlet|
+<h1>表示項目の選択と、クエリの入力
+<form action=@{CowJsonR} method="GET">
+    耳標番号:<input name="earNum" type="checkbox" checked value="1">
+    名前:<input name="name" type="checkbox" checked value="1">
+    誕生日:<input name="birth" type="checkbox" checked value="1">
+    性別:<input name="sex" type="checkbox" checked value="1">
+    所有者名:<input name="ownerName" type="checkbox" checked value="1">
+    <p>
+    t1-10:<input name="t1" type="checkbox" checked value="1">
+    t11-20:<input name="t2" type="checkbox" checked value="1">
+    t21-30:<input name="t3" type="checkbox" checked value="1">
+    t31-40:<input name="t4" type="checkbox" checked value="1">
+    t41-50:<input name="t5" type="checkbox" checked value="1">
+    <p>
+    検索条件(where):
+    <input name="where" type="text" value="owner.name = \"Owner5\"">
+    <p>
+    <input type="submit" value="送信">
+                 |]
+--  defaultLayout $(widgetFile "CowTable5.hamlet")
+
+getCowJsonR :: Handler Value
+getCowJsonR = do
+  (columns, query) <- editColumnsQuery
+  App conn tableColumns <- getYesod
+  cowsRows <- liftIO $ do
+    -- let sqlQ = concat ["SELECT "
+    --                   , columns
+    --                   , " from cow INNER JOIN owner on cow.owner_id == owner.id"
+    --                   , (whereQ query)]
+    --     whereQ (Just q) = concat [" where ", q]
+    --     whereQ _ = ""
+    let sqlQ = "SELECT * FORM cow INNER JOIN owner ON cow.owner_id == owner.id WHERE owner.id = 5"
+    stmt <- prepare conn sqlQ
+    execute stmt []
+    fetchAllRowsAL' stmt
+  returnJson cowsRows
+    where
+      editColumnsQuery = do
+        let colTags  = ["earNum", "name", "birth", "sex", "ownerName"]
+            colNames = ["earNum", "name", "birth", "sex", "owner.name"]
+            groupTags = ["t1", "t2", "t3", "t4", "t5"]
+            groupNames = ["t1, t2, t3, t4, t5, t6, t7, t8, t9, t10",
+                          "t11, t12, t13, t14, t15, t16, t17, t18, t19, t20",
+                          "t21, t22, t23, t24, t25, t26, t27, t28, t29, t30",
+                          "t31, t32, t33, t34, t35, t36, t37, t38, t39, t40",
+                          "t41, t42, t43, t44, t45, t46, t47, t48, t49, t50"]
+        colList <- mapM (\t -> runInputGet $ iopt textField t)
+                        (colTags ++ groupTags)
+        query<- runInputGet $ iopt textField "where"
+        -- liftIO $ print $ (zip colNames colList, zip groupTags gList, ("where", query))
+        -- let cols = intercalate ", " $ map (\(c,f)-> c) $ filter checked $
+        --            zip (colNames ++ groupNames) colList 
+        let colss = map (\(c,f)-> (c) ) $ filter checked $ zip (colNames ++ groupNames) colList
+            cols = (intercalate ", " colss) 
+        liftIO $ print (cols, query)
+        return (cols, query)
+      checked (_, (Just "1")) = True
+      checked (_, _) = False
+
+main :: IO ()
+main = do
+  conn <- connectSqlite3 "test2.sqlite"
+  tables <-getTables conn
+  tabCol <- mapM (describeList conn) tables
+  print tabCol
+  warp 3000 $ App {connection = conn,
+                  tableColumns = tabCol}
+  disconnect conn
+    where
+      describeList conn tableName = do
+        desc <- describeTable conn tableName
+        let labels = map fst desc
+        return (tableName, labels)
