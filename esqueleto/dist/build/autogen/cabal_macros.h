@@ -42,12 +42,12 @@
   (major1) == 2 && (major2) <  1 || \
   (major1) == 2 && (major2) == 1 && (minor) <= 2)
 
-/* package persistent-sqlite-2.1.4 */
-#define VERSION_persistent_sqlite "2.1.4"
-#define MIN_VERSION_persistent_sqlite(major1,major2,minor) (\
+/* package persistent-postgresql-2.1.3 */
+#define VERSION_persistent_postgresql "2.1.3"
+#define MIN_VERSION_persistent_postgresql(major1,major2,minor) (\
   (major1) <  2 || \
   (major1) == 2 && (major2) <  1 || \
-  (major1) == 2 && (major2) == 1 && (minor) <= 4)
+  (major1) == 2 && (major2) == 1 && (minor) <= 3)
 
 /* package persistent-template-2.1.1 */
 #define VERSION_persistent_template "2.1.1"
@@ -76,6 +76,13 @@
   (major1) <  1 || \
   (major1) == 1 && (major2) <  4 || \
   (major1) == 1 && (major2) == 4 && (minor) <= 1)
+
+/* package split-0.2.2 */
+#define VERSION_split "0.2.2"
+#define MIN_VERSION_split(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  2 || \
+  (major1) == 0 && (major2) == 2 && (minor) <= 2)
 
 /* package text-1.2.0.4 */
 #define VERSION_text "1.2.0.4"

@@ -1,0 +1,11 @@
+Configuring json2-0.8.3...
+Building json2-0.8.3...
+Preprocessing library json2-0.8.3...
+
+src/Data/JSON2/Blaze.hs:23:8:
+    Could not find module ‘Blaze.ByteString.Builder.Internal’
+    Perhaps you meant
+      Data.ByteString.Builder.Internal (from bytestring-0.10.4.0)
+      Blaze.ByteString.Builder.Int (from blaze-builder-0.4.0.1)
+      Blaze.ByteString.Builder.Internal.Write (from blaze-builder-0.4.0.1)
+    Use -v to see a list of the files searched for.

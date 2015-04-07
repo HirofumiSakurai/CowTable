@@ -1,0 +1,19 @@
+Configuring connection-0.2.4...
+Building connection-0.2.4...
+Preprocessing library connection-0.2.4...
+[1 of 3] Compiling Network.Connection.Types ( Network/Connection/Types.hs, dist/dist-sandbox-8578b126/build/Network/Connection/Types.o )
+[2 of 3] Compiling Network.Connection.ChachaRNG ( Network/Connection/ChachaRNG.hs, dist/dist-sandbox-8578b126/build/Network/Connection/ChachaRNG.o )
+
+Network/Connection/ChachaRNG.hs:27:10: Warning:
+    No explicit implementation for
+      ‘cprgSetReseedThreshold’, ‘cprgFork’, and ‘cprgGenerateWithEntropy’
+    In the instance declaration for ‘CPRG ChachaRNG’
+[3 of 3] Compiling Network.Connection ( Network/Connection.hs, dist/dist-sandbox-8578b126/build/Network/Connection.o )
+
+Network/Connection.hs:86:1: Warning:
+    Defined but not used: ‘connectionSessionManager’
+In-place registering connection-0.2.4...
+Creating package registration file: /tmp/pkgConf-connection-0.27599.4
+Installing library in
+/home/hirofumi/yesod/CowTable1/HDBC/.cabal-sandbox/lib/x86_64-linux-ghc-7.8.4/connection-0.2.4
+Registering connection-0.2.4...

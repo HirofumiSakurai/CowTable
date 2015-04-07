@@ -7,7 +7,8 @@
 {-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
-import           Data.Text
+import           Data.List.Split (wordsBy)
+import qualified Data.Text as T
 import           Control.Applicative ((<$>), (<*>))
 import           Control.Monad
 import           Control.Monad.Logger (runStderrLoggingT)
@@ -17,8 +18,9 @@ import           Database.Esqueleto      ((^.), valkey)
 import           Data.Aeson
 import           Data.Aeson.Types
 import           Database.Persist
-import           Database.Persist.Sqlite
+import           Database.Persist.Postgresql
 import           Database.Persist.TH
+import           Data.Time (Day, fromGregorian, showGregorian)
 import           Data.Time.Clock
 import           Data.Conduit            (awaitForever, ($=))
 import           Yesod
@@ -26,14 +28,25 @@ import           Yesod
 data App = App
              { appPool   :: ConnectionPool }
 
+--  "%Y-%m-%d" like "2000-01-02"
+instance FromJSON Day where
+    parseJSON (String t) = fromGregorian <$> y
+                                         <*> (fromIntegral m)
+                                         <*> (fromIntegral d)
+      where
+        [y, m, d] = map (read.(T.unpack)) $ T.split (== '-') t
+
+instance ToJSON Day where
+    toJSON day = String (T.pack $ showGregorian day)
+
 share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
 Owner json
-    name  Text
+    name  T.Text
 Cow json
     earNum Int
-    name   Text
-    birth  UTCTime
-    sex    Text
+    name   T.Text
+    birth Day
+    sex    T.Text
     ownerId OwnerId
     t1     Int Maybe
     t2     Int Maybe
@@ -87,6 +100,7 @@ Cow json
     t50    Int Maybe
 |]
 
+
 mkYesod "App" [parseRoutes|
 / HomeR GET
 /eSelect ESelectR GET
@@ -108,14 +122,14 @@ instance YesodPersistRunner App where
     getDBRunner = defaultGetDBRunner appPool
 
 data CowQuery = CowQuery {
-  ear :: Maybe Int, name :: Maybe Text, sex :: Text, ownerId :: Maybe Text,
+  ear :: Maybe Int, name :: Maybe T.Text, sex :: T.Text, ownerId :: Maybe T.Text,
   t0 :: Bool, t1 :: Bool, t2 :: Bool, t3 :: Bool, t4 :: Bool }
 
 cowForm :: Html -> MForm Handler (FormResult CowQuery, Widget)
 cowForm = renderDivs $ CowQuery
     <$> aopt intField "ear" Nothing
     <*> aopt textField "Name" Nothing
-    <*> areq textField "sex" (Just (pack "female"))
+    <*> areq textField "sex" (Just (T.pack "female"))
     <*> aopt textField "Owner" Nothing
     <*> areq checkBoxField "t1-10" Nothing
     <*> areq checkBoxField "t11-20" Nothing
@@ -139,7 +153,7 @@ getESelectR :: Handler TypedContent
 getESelectR = do
   -- ((result, _), _) <- runFormGet cowForm
   -- case result of
-  --   FormFailure_ -> sendChunkBS (pack "invalid query")
+  --   FormFailure_ -> sendChunkBS (T.pack "invalid query")
   --  FormMissing  -> respondSourceDB typeJson $
   --                           cowsSrc $= awaitForever toBuilder
   respondSourceDB typeJson $ cowsSrc $= awaitForever toBuilder
@@ -197,6 +211,8 @@ getESelectR = do
 openConnectionCount :: Int
 openConnectionCount = 10
 
+connStr = "host=localhost dbname=cow_table user=hirofumi password='hello'"
+
 main :: IO ()
-main = runStderrLoggingT $ withSqlitePool "test2.sqlite" openConnectionCount $ \pool -> liftIO $ do
+main = runStderrLoggingT $ withPostgresqlPool connStr openConnectionCount $ \pool -> liftIO $ do
     warp 3000 $ App {appPool = pool}

@@ -1,3 +1,6 @@
+split -any
+json2 -any
+persistent-postgresql -any
 persistent-sqlite -any
 sqlite -any
 yesod -any

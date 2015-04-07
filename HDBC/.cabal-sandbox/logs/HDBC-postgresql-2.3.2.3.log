@@ -1,0 +1,19 @@
+[1 of 1] Compiling Main             ( /tmp/HDBC-postgresql-2.3.2.3-9562/HDBC-postgresql-2.3.2.3/dist/dist-sandbox-8578b126/setup/setup.hs, /tmp/HDBC-postgresql-2.3.2.3-9562/HDBC-postgresql-2.3.2.3/dist/dist-sandbox-8578b126/setup/Main.o )
+Linking /tmp/HDBC-postgresql-2.3.2.3-9562/HDBC-postgresql-2.3.2.3/dist/dist-sandbox-8578b126/setup/setup ...
+Configuring HDBC-postgresql-2.3.2.3...
+Building HDBC-postgresql-2.3.2.3...
+Preprocessing library HDBC-postgresql-2.3.2.3...
+[1 of 9] Compiling Database.HDBC.PostgreSQL.Parser ( Database/HDBC/PostgreSQL/Parser.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/Parser.o )
+[2 of 9] Compiling Database.HDBC.PostgreSQL.PTypeConv ( dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/PTypeConv.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/PTypeConv.o )
+[3 of 9] Compiling Database.HDBC.PostgreSQL.Types ( Database/HDBC/PostgreSQL/Types.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/Types.o )
+[4 of 9] Compiling Database.HDBC.PostgreSQL.Utils ( dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/Utils.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/Utils.o )
+[5 of 9] Compiling Database.HDBC.PostgreSQL.Statement ( dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/Statement.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/Statement.o )
+[6 of 9] Compiling Database.HDBC.PostgreSQL.ConnectionImpl ( Database/HDBC/PostgreSQL/ConnectionImpl.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/ConnectionImpl.o )
+[7 of 9] Compiling Database.HDBC.PostgreSQL.Connection ( dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/Connection.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/Connection.o )
+[8 of 9] Compiling Database.HDBC.PostgreSQL.ErrorCodes ( Database/HDBC/PostgreSQL/ErrorCodes.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL/ErrorCodes.o )
+[9 of 9] Compiling Database.HDBC.PostgreSQL ( Database/HDBC/PostgreSQL.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/PostgreSQL.o )
+In-place registering HDBC-postgresql-2.3.2.3...
+Creating package registration file: /tmp/pkgConf-HDBC-postgresql-2.3.29562.3
+Installing library in
+/home/hirofumi/yesod/CowTable1/HDBC/.cabal-sandbox/lib/x86_64-linux-ghc-7.8.4/HDBC-postgresql-2.3.2.3
+Registering HDBC-postgresql-2.3.2.3...

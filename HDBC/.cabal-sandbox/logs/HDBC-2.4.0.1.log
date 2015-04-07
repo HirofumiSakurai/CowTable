@@ -1,0 +1,16 @@
+Configuring HDBC-2.4.0.1...
+Building HDBC-2.4.0.1...
+Preprocessing library HDBC-2.4.0.1...
+[1 of 8] Compiling Database.HDBC.Locale ( Database/HDBC/Locale.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/Locale.o )
+[2 of 8] Compiling Database.HDBC.SqlValue ( Database/HDBC/SqlValue.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/SqlValue.o )
+[3 of 8] Compiling Database.HDBC.ColTypes ( Database/HDBC/ColTypes.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/ColTypes.o )
+[4 of 8] Compiling Database.HDBC.Statement ( Database/HDBC/Statement.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/Statement.o )
+[5 of 8] Compiling Database.HDBC.Types ( Database/HDBC/Types.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/Types.o )
+[6 of 8] Compiling Database.HDBC.Utils ( Database/HDBC/Utils.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/Utils.o )
+[7 of 8] Compiling Database.HDBC.DriverUtils ( Database/HDBC/DriverUtils.hs, dist/dist-sandbox-8578b126/build/Database/HDBC/DriverUtils.o )
+[8 of 8] Compiling Database.HDBC    ( Database/HDBC.hs, dist/dist-sandbox-8578b126/build/Database/HDBC.o )
+In-place registering HDBC-2.4.0.1...
+Creating package registration file: /tmp/pkgConf-HDBC-2.4.07599.1
+Installing library in
+/home/hirofumi/yesod/CowTable1/HDBC/.cabal-sandbox/lib/x86_64-linux-ghc-7.8.4/HDBC-2.4.0.1
+Registering HDBC-2.4.0.1...
