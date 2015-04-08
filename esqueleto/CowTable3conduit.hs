@@ -30,11 +30,11 @@ data App = App
 
 --  "%Y-%m-%d" like "2000-01-02"
 instance FromJSON Day where
-    parseJSON (String t) = fromGregorian <$> y
-                                         <*> (fromIntegral m)
-                                         <*> (fromIntegral d)
+    parseJSON (String t) = return $ fromGregorian y m d
       where
-        [y, m, d] = map (read.(T.unpack)) $ T.split (== '-') t
+        [y, m', d'] = map (read.(T.unpack)) $ T.split (== '-') t
+        m = (fromIntegral m') :: Int
+        d = (fromIntegral d') :: Int
 
 instance ToJSON Day where
     toJSON day = String (T.pack $ showGregorian day)
