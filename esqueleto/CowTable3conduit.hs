@@ -185,7 +185,7 @@ getESelectR = do
           E.selectSource
             $ E.from $ \(cow `E.InnerJoin` owner) -> do
                 E.on $ cow ^. CowOwnerId E.==. owner ^. OwnerId
-                E.where_ $ owner ^. OwnerName E.==. E.val ownerName
+                E.where_ $ owner ^. OwnerName `E.like` E.val ownerName
                 return $ (
                   cow ^. CowEarNum, cow ^. CowName, cow ^. CowBirth,
                   cow ^. CowSex, owner ^. OwnerName,
